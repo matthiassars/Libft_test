@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/05 21:21:00 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/05 23:34:46 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	test_itoa(void)
 {
 	long	i;
 
-	printheader("ft_atoi");
+	printheader("ft_itoa");
 	i = -2147483649;
 	while (i <= -2147483647)
 	{
