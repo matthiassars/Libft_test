@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/05 23:33:32 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 00:27:10 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	test_isalpha(void)
 	{
 		printf("%03d  %d  %d  %d  %d  %d  \'%c\'\n", c,
 			ft_isalpha(c),
-			ft_isdigit(c),
-			ft_isalnum(c),
-			ft_isascii(c),
-			ft_isprint(c),
-			c);
+		ft_isdigit(c),
+		ft_isalnum(c),
+		ft_isascii(c),
+		ft_isprint(c),
+		c);
 		c++;
 	}
 }
@@ -140,28 +140,36 @@ void	test_strlcpy(void)
 	printf("test:  \"%s\" %d\n", dst, n);
 	n = strlcpy(dst, src, 16);
 	printf("libc:  \"%s\" %d\n", dst, n);
+	n = ft_strlcpy(dst, src, 1);
+	printf("test:  \"%s\" %d\n", dst, n);
+	n = strlcpy(dst, src, 1);
+	printf("libc:  \"%s\" %d\n", dst, n);
 }
 
-void	test_strlcat(void)
+void	test_single_strlcat(size_t size)
 {
 	char	*src = "world!!!!!!";
 	char	dst0[32] = "Hello ";
 	char	dst1[32] = "Hello ";
-	char	dst2[32] = "Hello ";
-	char	dst3[32] = "Hello ";
 	size_t	n;
 
+	n = ft_strlcat(dst0, src, size);
+	printf("test:  \"%s\" %zu %zu %zu\n", dst0, size, ft_strlen(dst0), n);
+	n = strlcat(dst1, src, size);
+	printf("libc:  \"%s\" %zu %zu %zu\n", dst1, size, ft_strlen(dst1), n);
+}
+
+void	test_strlcat(void)
+{
+	size_t	i;
+
 	printheader("ft_strlcat");
-	printf("\"%s\" \"%s\" %zu %zu\n",
-		dst0, src, ft_strlen(dst0), ft_strlen(src));
-	n = ft_strlcat(dst0, src, 13);
-	printf("test:  \"%s\" %zu %zu\n", dst0, n, ft_strlen(dst0));
-	n = strlcat(dst1, src, 13);
-	printf("libc:  \"%s\" %zu %zu\n", dst1, n, ft_strlen(dst1));
-	n = ft_strlcat(dst2, src, 32);
-	printf("test:  \"%s\" %zu %zu\n", dst2, n, ft_strlen(dst2));
-	n = strlcat(dst3, src, 32);
-	printf("libc:  \"%s\" %zu %zu\n", dst3, n, ft_strlen(dst3));
+	i = 1;
+	while (i <= 32)
+	{
+		test_single_strlcat(i);
+		i++;
+	}
 }
 
 void	test_toupper_lower(void)
