@@ -6,12 +6,12 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/05 18:39:29 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/05 21:21:00 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
+#include "Libft/libft.h"
 #include "test_utils.h"
 
 void	test_substr(void)
@@ -111,11 +111,13 @@ void	test_itoa(void)
 
 char	f1(unsigned int i, char c)
 {
+	(void) i;
 	return (ft_toupper(c));
 }
 
 void	f2(unsigned int i, char *c)
 {
+	(void) i;
 	*c = ft_toupper(*c);
 }
 
@@ -140,7 +142,6 @@ void	test_putendl_fd(void)
 	ft_putendl_fd("Hello world!!", 1);
 	ft_putendl_fd("\"", 1);
 }
-
 
 void	test_single_putnbr_fd(long n)
 {

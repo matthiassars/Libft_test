@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <bsd/string.h>
-#include "libft.h"
+#include "Libft/libft.h"
 #include "test_utils.h"
 
 void	print_bytes(unsigned char *a, int n)

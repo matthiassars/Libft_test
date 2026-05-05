@@ -15,7 +15,6 @@ void	printheader(char *s)
 	int	hline_len_l;
 	int	hline_len_r;
 	int	str_len;
-	int	i;
 
 	str_len = strlen(s);
 	hline_len_l = (76 - strlen(s)) / 2;

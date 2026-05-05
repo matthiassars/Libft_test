@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
+#include "Libft/libft.h"
 #include "test_utils.h"
 
 void	printlstitem(void *content)
