@@ -16,7 +16,7 @@
 #include "Libft/libft.h"
 #include "test_utils.h"
 
-void	print_bytes(unsigned char *a, int n)
+void	print_bytes(unsigned char* a, int n)
 {
 	int	i;
 
@@ -40,18 +40,18 @@ void	test_isalpha(void)
 	{
 		printf("%03d  %d  %d  %d  %d  %d  \'%c\'\n", c,
 			ft_isalpha(c),
-		ft_isdigit(c),
-		ft_isalnum(c),
-		ft_isascii(c),
-		ft_isprint(c),
-		c);
+			ft_isdigit(c),
+			ft_isalnum(c),
+			ft_isascii(c),
+			ft_isprint(c),
+			c);
 		c++;
 	}
 }
 
 void	test_strlen(void)
 {
-	char	*s = "Hello";
+	char* s = "Hello";
 
 	printheader("ft_strlen");
 	printf("\"%s\"  test: %zu  libc: %zu\n", s, ft_strlen(s), strlen(s));
@@ -93,7 +93,7 @@ void	test_memmove(void)
 		i++;
 	}
 	s[10] = '\0';
-	printf("%s\n", (char *)ft_memmove(s + 4, s + 2, 3));
+	printf("%s\n", (char*)ft_memmove(s + 4, s + 2, 3));
 	printf("%s\n", s);
 	i = 0;
 	while (i < 10)
@@ -102,7 +102,7 @@ void	test_memmove(void)
 		i++;
 	}
 	s[10] = '\0';
-	printf("%s\n", (char *)ft_memmove(s + 2, s + 4, 3));
+	printf("%s\n", (char*)ft_memmove(s + 2, s + 4, 3));
 	printf("%s\n", s);
 	printf("libc:\n");
 	i = 0;
@@ -112,7 +112,7 @@ void	test_memmove(void)
 		i++;
 	}
 	s[10] = '\0';
-	printf("%s\n", (char *)memmove(s + 4, s + 2, 3));
+	printf("%s\n", (char*)memmove(s + 4, s + 2, 3));
 	printf("%s\n", s);
 	i = 0;
 	while (i < 10)
@@ -121,13 +121,13 @@ void	test_memmove(void)
 		i++;
 	}
 	s[10] = '\0';
-	printf("%s\n", (char *)memmove(s + 2, s + 4, 3));
+	printf("%s\n", (char*)memmove(s + 2, s + 4, 3));
 	printf("%s\n", s);
 }
 
 void	test_strlcpy(void)
 {
-	char	*src = "Hello!!!";
+	char* src = "Hello!!!";
 	char	dst[16];
 	int		n;
 
@@ -144,7 +144,7 @@ void	test_strlcpy(void)
 
 void	test_strlcat(void)
 {
-	char	*src = "world!!!!!!";
+	char* src = "world!!!!!!";
 	char	dst0[32] = "Hello ";
 	char	dst1[32] = "Hello ";
 	char	dst2[32] = "Hello ";
@@ -180,7 +180,7 @@ void	test_toupper_lower(void)
 
 void	test_strchr(void)
 {
-	char	*s = "Go and find the needle in the haystack, my friend.";
+	char* s = "Go and find the needle in the haystack, my friend.";
 
 	printheader("ft_strchr");
 	printf("test:  %s\n", ft_strchr(s, 'f'));
@@ -201,8 +201,8 @@ void	test_strchr(void)
 
 void	test_strncmp(void)
 {
-	char	*s1 = "Hello world!";
-	char	*s2 = "Hello everyone!";
+	char* s1 = "Hello world!";
+	char* s2 = "Hello everyone!";
 	int		n;
 
 	printheader("ft_strncmp");
@@ -219,25 +219,25 @@ void	test_strncmp(void)
 
 void	test_memchr(void)
 {
-	char	*s = "Go and find the needle in the haystack, my friend.";
+	char	s[64] = "Go and find the needle in the haystack, my friend.";
 	int		n;
 
 	printheader("ft_memchr");
 	n = 6;
 	while (n <= 9)
 	{
-		printf("test:  %s\n", (char *)ft_memchr(s, 'f', n));
-		printf("libc:  %s\n", (char *)memchr(s, 'f', n));
+		printf("test:  %s\n", (char*)ft_memchr(s, 'f', n));
+		printf("libc:  %s\n", (char*)memchr(s, 'f', n));
 		n++;
 	}
-	printf("test:  %s\n", (char *)ft_memchr(s, 'x', 64));
-	printf("libc:  %s\n", (char *)memchr(s, 'x', 64));
+	printf("test:  %s\n", (char*)ft_memchr(s, 'x', 64));
+	printf("libc:  %s\n", (char*)memchr(s, 'x', 64));
 }
 
 void	test_memcmp(void)
 {
-	char	*s1 = "Hello world!";
-	char	*s2 = "Hello everyone!";
+	char	s1[16] = "Hello world!";
+	char	s2[16] = "Hello everyone!";
 	int		n;
 
 	printheader("ft_memcmp");
@@ -266,7 +266,7 @@ void	test_strnstr(void)
 	}
 }
 
-void	test_single_atoi(char *s)
+void	test_single_atoi(char* s)
 {
 	printf("\"%s\" %d\n", s, ft_atoi(s));
 }
@@ -274,7 +274,7 @@ void	test_single_atoi(char *s)
 void	test_atoi(void)
 {
 	long	i;
-	char	*s;
+	char* s;
 
 	printheader("ft_atoi");
 	s = malloc(32);
@@ -307,7 +307,7 @@ void	test_atoi(void)
 
 void	test_calloc1(size_t nmemb, size_t size)
 {
-	unsigned char	*c;
+	unsigned char* c;
 
 	printf("test:  %zu %zu:  ", nmemb, size);
 	c = ft_calloc(nmemb, size);
