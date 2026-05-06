@@ -158,11 +158,11 @@ void	test_single_strlcat(char *dst, char *src, size_t size)
 	memset(dst1, 'A', 32);
 	strcpy(dst1, dst);
 	n = ft_strlcat(dst1, src, size);
-	printf("libft:  \"%s\" %zu %zu %zu\n", dst1, size, ft_strlen(dst1), n);
+	printf("libft:  \"%s\" %zu %zu %zu\n", dst1, size, strlen(dst1), n);
 	memset(dst1, 'A', 32);
 	strcpy(dst1, dst);
 	n = strlcat(dst1, src, size);
-	printf("libc:   \"%s\" %zu %zu %zu\n", dst1, size, ft_strlen(dst1), n);
+	printf("libc:   \"%s\" %zu %zu %zu\n", dst1, size, strlen(dst1), n);
 }
 
 void	test_strlcat(void)

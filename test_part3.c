@@ -6,11 +6,12 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 11:38:41 by msars            #+#    #+#              */
-/*   Updated: 2026/05/05 18:48:18 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 10:08:56 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <ctype.h>
 #include "Libft/libft.h"
 #include "test_utils.h"
 
@@ -19,15 +20,14 @@ void	printlstitem(void *content)
 	char	*s;
 
 	s = content;
-	ft_putstr_fd(s, 1);
-	ft_putchar_fd(' ', 1);
+	printf("%s ", s);
 }
 
 void	printlst(t_list *lst)
 {
-	ft_putstr_fd("{ ", 1);
+	printf("{ ");
 	ft_lstiter(lst, &printlstitem);
-	ft_putstr_fd("}\n", 1);
+	printf("}\n");
 }
 
 void	*strtoupper(void *ptr)
@@ -37,11 +37,11 @@ void	*strtoupper(void *ptr)
 	char	*newstrptr;
 
 	str = ptr;
-	newstr = malloc(ft_strlen(str) + 1);
+	newstr = malloc(strlen(str) + 1);
 	newstrptr = newstr;
 	while (*str)
 	{
-		*newstrptr = ft_toupper(*str);
+		*newstrptr = toupper(*str);
 		newstrptr++;
 		str++;
 	}
@@ -65,15 +65,15 @@ int	main(void)
 	t_list	*lst;
 	t_list	*lst1;
 
-	printheader("ft_lstnew");
+	printheader("ft_lstnew [ft_lstiter]");
 	lst = ft_lstnew(s1);
 	printlst(lst);
 	putchar('\n');
-	printheader("ft_lstadd_front");
+	printheader("ft_lstadd_front [ft_lstiter]");
 	ft_lstadd_front(&lst, ft_lstnew(s0));
 	printlst(lst);
 	putchar('\n');
-	printheader("ft_lstadd_back");
+	printheader("ft_lstadd_back [ft_lstiter]");
 	ft_lstadd_back(&lst, ft_lstnew(s2));
 	ft_lstadd_back(&lst, ft_lstnew(s3));
 	ft_lstadd_back(&lst, ft_lstnew(s4));
@@ -84,9 +84,7 @@ int	main(void)
 	printlst(ft_lstlast(lst));
 	putchar('\n');
 	printheader("ft_lstsize");
-	ft_putnbr_fd(ft_lstsize(lst), 1);
-	ft_putchar_fd('\n', 1);
-	putchar('\n');
+	printf("%d\n\n", ft_lstsize(lst));
 	printheader("ft_lstmap");
 	lst1 = ft_lstmap(lst, strtoupper, del);
 	printlst(lst1);
