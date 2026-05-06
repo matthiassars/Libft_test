@@ -228,7 +228,7 @@ void	test_strncmp(void)
 	test_single_strncmp("Hello world!", "Hello everyone!", 6);
 	test_single_strncmp("Hello world!", "Hello everyone!", 7);
 	test_single_strncmp("Hello world!", "Hello everyone!", 16);
-	test_single_strncmp("Hello!\200", "Hello!\0", 7);
+	test_single_strncmp("Hello!\x80", "Hello!\0", 7);
 }
 
 void	test_memchr(void)
