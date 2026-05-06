@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/05 23:34:46 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 11:23:33 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,29 @@
 #include "Libft/libft.h"
 #include "test_utils.h"
 
+void	test_single_substr(unsigned int start, size_t len)
+{
+	char	s[32] = "Hello world!!!!!!";
+	char	*dst;
+
+	dst = ft_substr(s, start, len);
+	printf("\"%s\" %d %ld\n", dst, start, len);
+	free(dst);
+}
+
 void	test_substr(void)
 {
-	char* s = "Hello world!!!!!!";
-	char* dst;
-
 	printheader("ft_substr");
-	printf("\"%s\"\n", s);
-	dst = ft_substr(s, 0, 32);
-	printf("\"%s\" %d %d\n", dst, 0, 32);
-	free(dst);
-	dst = ft_substr(s, 6, 6);
-	printf("\"%s\" %d %d\n", dst, 6, 6);
-	free(dst);
+	test_single_substr(0, 32);
+	test_single_substr(6, 6);
+	test_single_substr(6, 0);
 }
 
 void	test_strjoin(void)
 {
-	char* s1 = "Hello ";
-	char* s2 = "world!";
-	char* dst;
+	char	*s1 = "Hello ";
+	char	*s2 = "world!";
+	char	*dst;
 
 	printheader("ft_strjoin");
 	printf("\"%s\" \"%s\"\n", s1, s2);
@@ -42,10 +45,9 @@ void	test_strjoin(void)
 	free(dst);
 }
 
-void	test_single_strtrim(char* s)
+void	test_single_strtrim(char *s, char *set)
 {
-	char* set = "_-";
-	char* dst;
+	char	*dst;
 
 	printf("\"%s\" \"%s\"\n", s, set);
 	dst = ft_strtrim(s, set);
@@ -56,16 +58,16 @@ void	test_single_strtrim(char* s)
 void	test_strtrim(void)
 {
 	printheader("ft_strtrim");
-	test_single_strtrim("___-_Hello World!!!--___");
+	test_single_strtrim("___-_Hello World!!!--___", "_-");
 	putchar('\n');
-	test_single_strtrim("___-_--___");
+	test_single_strtrim("___-_--___", "_-");
 }
 
 void	test_split(void)
 {
-	char* s = "   Hello  world!!    ";
-	char** words;
-	char** word;
+	char	*s = "   Hello  world!!    ";
+	char	**words;
+	char	**word;
 
 	printheader("ft_split");
 	words = ft_split(s, ' ');
@@ -83,7 +85,7 @@ void	test_split(void)
 
 void	test_single_itoa(int n)
 {
-	char* s;
+	char	*s;
 
 	s = ft_itoa(n);
 	printf("%d \"%s\"\n", n, s);
@@ -117,20 +119,20 @@ void	test_itoa(void)
 
 char	f1(unsigned int i, char c)
 {
-	(void)i;
+	(void) i;
 	return (ft_toupper(c));
 }
 
-void	f2(unsigned int i, char* c)
+void	f2(unsigned int i, char *c)
 {
-	(void)i;
+	(void) i;
 	*c = ft_toupper(*c);
 }
 
 void	test_strmap_iteri(void)
 {
-	char* s;
-	char* fs;
+	char	*s;
+	char	*fs;
 
 	printheader("ft_strmapi ft_striteri");
 	s = malloc(17);
