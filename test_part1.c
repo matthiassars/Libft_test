@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 10:01:12 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 10:19:30 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,22 +215,20 @@ void	test_strchr(void)
 	printf("libc:   %s\n", strrchr(s, 'G'));
 }
 
+void	test_single_strncmp(char *s1, char *s2, size_t n)
+{
+	printf("libft:  \"%s\" \"%s\" %lu %u\n", s1, s2, n, ft_strncmp(s1, s2, n));
+	printf("libc:   \"%s\" \"%s\" %lu %u\n", s1, s2, n, strncmp(s1, s2, n));
+}
+
 void	test_strncmp(void)
 {
-	char	*s1 = "Hello world!";
-	char	*s2 = "Hello everyone!";
-	int		n;
-
 	printheader("ft_strncmp");
-	n = 5;
-	while (n <= 8)
-	{
-		printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s2, n, ft_strncmp(s1, s2, n));
-		printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s2, n, strncmp(s1, s2, n));
-		n++;
-	}
-	printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, ft_strncmp(s1, s2, 16));
-	printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s1, 16, strncmp(s1, s2, 16));
+	test_single_strncmp("Hello world!", "Hello everyone!", 0);
+	test_single_strncmp("Hello world!", "Hello everyone!", 6);
+	test_single_strncmp("Hello world!", "Hello everyone!", 7);
+	test_single_strncmp("Hello world!", "Hello everyone!", 16);
+	test_single_strncmp("Hello!\200", "Hello!\0", 7);
 }
 
 void	test_memchr(void)
