@@ -248,22 +248,19 @@ void	test_memchr(void)
 	printf("libc:   %s\n", (char *) memchr(s, 'x', 64));
 }
 
+void	test_single_memcmp(char *s1, char *s2, size_t n)
+{
+	printf("libft:  \"%s\" \"%s\" %lu %u\n", s1, s2, n, ft_memcmp(s1, s2, n));
+	printf("libc:   \"%s\" \"%s\" %lu %u\n", s1, s2, n, memcmp(s1, s2, n));
+}
+
 void	test_memcmp(void)
 {
-	char	s1[16] = "Hello world!";
-	char	s2[16] = "Hello everyone!";
-	int		n;
-
 	printheader("ft_memcmp");
-	n = 5;
-	while (n <= 8)
-	{
-		printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s2, n, ft_memcmp(s1, s2, n));
-		printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s2, n, memcmp(s1, s2, n));
-		n++;
-	}
-	printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, ft_memcmp(s1, s2, 16));
-	printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s1, 16, memcmp(s1, s2, 16));
+	test_single_memcmp("Hello world!", "Hello everyone!", 0);
+	test_single_memcmp("Hello world!", "Hello everyone!", 6);
+	test_single_memcmp("Hello world!", "Hello everyone!", 7);
+	test_single_memcmp("Hello world!", "Hello everyone!", 16);
 }
 
 void	test_strnstr(void)
