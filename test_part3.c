@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include "Libft/libft.h"
+#include "libft/libft.h"
 #include "test_utils.h"
 
 void	printlstitem(void *content)

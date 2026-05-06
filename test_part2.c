@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "Libft/libft.h"
+#include "libft/libft.h"
 #include "test_utils.h"
 
 void	test_single_substr(char *s, unsigned int start, size_t len)
