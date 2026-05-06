@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 10:56:23 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 13:53:04 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,25 +194,26 @@ void	test_toupper_lower(void)
 	putchar('\n');
 }
 
+void	test_single_strchr(char *s, int c)
+{
+	printf("'%c' %d\n", c, c);
+	printf("libft:  \"%s\" \"%s\"\n", ft_strchr(s, c), ft_strrchr(s, c));
+	printf("libc:   \"%s\" \"%s\"\n", strchr(s, c), strrchr(s, c));
+}
+
 void	test_strchr(void)
 {
 	char	*s = "Go and find the needle in the haystack, my friend.";
 
-	printheader("ft_strchr");
-	printf("libft:  %s\n", ft_strchr(s, 'f'));
-	printf("libc:   %s\n", strchr(s, 'f'));
-	printf("libft:  %d\n", *ft_strchr(s, '\0'));
-	printf("libc:   %d\n", *strchr(s, '\0'));
-	printf("libft:  %s\n", ft_strchr(s, 'x'));
-	printf("libc:   %s\n", strchr(s, 'x'));
-	printf("libft:  %s\n", ft_strrchr(s, 'f'));
-	printf("libc:   %s\n", strrchr(s, 'f'));
-	printf("libft:  %d\n", *ft_strrchr(s, '\0'));
-	printf("libc:   %d\n", *strrchr(s, '\0'));
-	printf("libft:  %s\n", ft_strrchr(s, 'x'));
-	printf("libc:   %s\n", strrchr(s, 'x'));
-	printf("libft:  %s\n", ft_strrchr(s, 'G'));
-	printf("libc:   %s\n", strrchr(s, 'G'));
+	printheader("ft_strchr ft_strrchr");
+	test_single_strchr(s, 'f');
+	test_single_strchr(s, '\0');
+	test_single_strchr(s, 'x');
+	test_single_strchr(s, 'G');
+	test_single_strchr(s, '.');
+	test_single_strchr(s, 'f' + 256);
+	test_single_strchr(s, 1024);
+	test_single_strchr("", 'x');
 }
 
 void	test_single_strncmp(char *s1, char *s2, size_t n)
@@ -231,21 +232,23 @@ void	test_strncmp(void)
 	test_single_strncmp("Hello!\x80", "Hello!\0", 7);
 }
 
+void	test_single_memchr(void *s, int c, size_t n)
+{
+	printf("libft:  \"%s\"\n", (char *)ft_memchr(s, c, n));
+	printf("libc:   \"%s\"\n", (char *)memchr(s, c, n));
+}
+
 void	test_memchr(void)
 {
 	char	s[64] = "Go and find the needle in the haystack, my friend.";
-	int		n;
 
 	printheader("ft_memchr");
-	n = 6;
-	while (n <= 9)
-	{
-		printf("libft:  %s\n", (char *) ft_memchr(s, 'f', n));
-		printf("libc:   %s\n", (char *) memchr(s, 'f', n));
-		n++;
-	}
-	printf("libft:  %s\n", (char *) ft_memchr(s, 'x', 64));
-	printf("libc:   %s\n", (char *) memchr(s, 'x', 64));
+	test_single_memchr(s, 'f', 7);
+	test_single_memchr(s, 'f', 8);
+	test_single_memchr(s, 'G', 1);
+	test_single_memchr(s, 'G', 0);
+	test_single_memchr(s, '\0', 64);
+	test_single_memchr("", 'x', 1);
 }
 
 void	test_single_memcmp(char *s1, char *s2, size_t n)
@@ -279,7 +282,7 @@ void	test_strnstr(void)
 
 void	test_single_atoi(char *s)
 {
-	printf("\"%s\" %d\n", s, ft_atoi(s));
+	printf("\"%s\" %d  ", s, ft_atoi(s));
 }
 
 void	test_atoi(void)
@@ -296,6 +299,7 @@ void	test_atoi(void)
 		test_single_atoi(s);
 		i++;
 	}
+	printf("\n");
 	i = -20;
 	while (i <= 20)
 	{
@@ -303,6 +307,7 @@ void	test_atoi(void)
 		test_single_atoi(s);
 		i++;
 	}
+	printf("\n");
 	i = 2147483646;
 	while (i <= 2147483648)
 	{
@@ -310,10 +315,11 @@ void	test_atoi(void)
 		test_single_atoi(s);
 		i++;
 	}
+	printf("\n");
 	free(s);
 	test_single_atoi("  --42 ");
 	test_single_atoi("  --1337+42");
-	putchar('\n');
+	printf("\n");
 }
 
 void	test_calloc1(size_t nmemb, size_t size)

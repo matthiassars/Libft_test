@@ -1,5 +1,5 @@
 TARGETS =	test_part1 test_part2 test_part3
-LIB =		Libft/libft.a
+LIB =		libft/libft.a
 
 # Default rule
 all: $(TARGETS)

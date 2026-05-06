@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 11:23:33 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 15:08:14 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 #include "Libft/libft.h"
 #include "test_utils.h"
 
-void	test_single_substr(unsigned int start, size_t len)
+void	test_single_substr(char *s, unsigned int start, size_t len)
 {
-	char	s[32] = "Hello world!!!!!!";
 	char	*dst;
 
 	dst = ft_substr(s, start, len);
-	printf("\"%s\" %d %ld\n", dst, start, len);
+	printf("\"%s\" %d %ld \"%s\"\n", s, start, len, dst);
 	free(dst);
 }
 
 void	test_substr(void)
 {
 	printheader("ft_substr");
-	test_single_substr(0, 32);
-	test_single_substr(6, 6);
-	test_single_substr(6, 0);
+	test_single_substr("Hello world!!!!!!", 0, 64);
+	test_single_substr("Hello world!!!!!!", 6, 64);
+	test_single_substr("Hello world!!!!!!", 6, 6);
+	test_single_substr("Hello world!!!!!!", 6, 0);
+	test_single_substr("Hello world!!!!!!", 64, 1);
+	test_single_substr("Hello world", 10, 64);
+	test_single_substr("", 6, 64);
+	test_single_substr("hola", 4294967295, 0);
 }
 
 void	test_strjoin(void)
@@ -59,62 +63,60 @@ void	test_strtrim(void)
 {
 	printheader("ft_strtrim");
 	test_single_strtrim("___-_Hello World!!!--___", "_-");
-	putchar('\n');
+	printf("\n");
 	test_single_strtrim("___-_--___", "_-");
 }
 
-void	test_split(void)
+void	test_single_split(char *s, char c)
 {
-	char	*s = "   Hello  world!!    ";
 	char	**words;
 	char	**word;
 
-	printheader("ft_split");
-	words = ft_split(s, ' ');
+	words = ft_split(s, c);
 	word = words;
-	printf("\"%s\"\n", s);
+	printf("\"%s\" '%c'\n{ ", s, c);
 	while (*word)
 	{
 		printf("\"%s\" ", *word);
 		free(*word);
 		word++;
 	}
-	putchar('\n');
+	printf("}\n");
 	free(words);
 }
 
-void	test_single_itoa(int n)
+void	test_split(void)
 {
+	printheader("ft_split");
+	test_single_split("   Hello  world!    ", ' ');
+	test_single_split("   Hello  world!", ' ');
+	test_single_split("       ", ' ');
+	test_single_split("", ' ');
+	test_single_split("   Hello  world!    ", '\0');
+}
+
+void	test_itoa_range(long min, long max)
+{
+	long	i;
 	char	*s;
 
-	s = ft_itoa(n);
-	printf("%d \"%s\"\n", n, s);
-	free(s);
+	i = min;
+	while (i <= max)
+	{
+		s = ft_itoa(i);
+		printf("%ld \"%s\"  ", i, s);
+		free(s);
+		i++;
+	}
+	printf("\n");
 }
 
 void	test_itoa(void)
 {
-	long	i;
-
 	printheader("ft_itoa");
-	i = -2147483649;
-	while (i <= -2147483647)
-	{
-		test_single_itoa(i);
-		i++;
-	}
-	i = -20;
-	while (i <= 20)
-	{
-		test_single_itoa(i);
-		i++;
-	}
-	i = 2147483646;
-	while (i <= 2147483648)
-	{
-		test_single_itoa(i);
-		i++;
-	}
+	test_itoa_range(-2147483649, -2147483647);
+	test_itoa_range(-20, 20);
+	test_itoa_range(2147483646, 2147483648);
 }
 
 char	f1(unsigned int i, char c)
@@ -145,41 +147,27 @@ void	test_strmap_iteri(void)
 
 void	test_putendl_fd(void)
 {
-	printheader("ft_putendl_fd");
+	printheader("ft_putchar_fd ft_putendl_fd");
 	ft_putchar_fd('\"', 1);
 	ft_putendl_fd("Hello world!!", 1);
 	ft_putendl_fd("\"", 1);
 }
 
-void	test_single_putnbr_fd(long n)
+void	test_single_putnbr(int n)
 {
+	printf("%d\n", n);
 	ft_putnbr_fd(n, 1);
-	ft_putchar_fd('\n', 1);
+	printf("\n");
 }
 
 void	test_putnbr_fd(void)
 {
-	long	i;
-
-	printheader("ft_putnbr");
-	i = -2147483649;
-	while (i <= -2147483647)
-	{
-		test_single_putnbr_fd(i);
-		i++;
-	}
-	i = -20;
-	while (i <= 20)
-	{
-		test_single_putnbr_fd(i);
-		i++;
-	}
-	i = 2147483646;
-	while (i <= 2147483648)
-	{
-		test_single_putnbr_fd(i);
-		i++;
-	}
+	printheader("ft_putnbr_fd");
+	test_single_putnbr(-2147483648);
+	test_single_putnbr(-1337);
+	test_single_putnbr(0);
+	test_single_putnbr(1337);
+	test_single_putnbr(2147483647);
 }
 
 int	main(void)
