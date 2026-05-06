@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 10:19:30 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 10:56:23 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,18 +263,18 @@ void	test_memcmp(void)
 	test_single_memcmp("Hello world!", "Hello everyone!", 16);
 }
 
+void	test_single_strnstr(size_t n)
+{
+	printf("libft:  \"%s\" %ld\n", ft_strnstr("Find the needle in the haystack.", "needle", n), n);
+	printf("libc:   \"%s\" %ld\n", strnstr("Find the needle in the haystack.", "needle", n), n);
+}
+
 void	test_strnstr(void)
 {
-	int	n;
-
 	printheader("ft_strnstr");
-	n = 13;
-	while (n <= 16)
-	{
-		printf("libft:  \"%s\" %d\n", ft_strnstr("Find the needle in the haystack.", "needle", n), n);
-		printf("libc:   \"%s\" %d\n", strnstr("Find the needle in the haystack.", "needle", n), n);
-		n++;
-	}
+	test_single_strnstr(0);
+	test_single_strnstr(14);
+	test_single_strnstr(15);
 }
 
 void	test_single_atoi(char *s)
