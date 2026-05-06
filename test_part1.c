@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 00:27:10 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/06 10:01:12 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	test_strlen(void)
 	char	*s = "Hello";
 
 	printheader("ft_strlen");
-	printf("\"%s\"  test: %zu  libc: %zu\n", s, ft_strlen(s), strlen(s));
+	printf("\"%s\"  libft: %zu  libc:  %zu\n", s, ft_strlen(s), strlen(s));
 }
 
 void	test_mem(void)
@@ -132,44 +132,52 @@ void	test_strlcpy(void)
 	int		n;
 
 	printheader("ft_strlcpy");
-	n = ft_strlcpy(dst, src, 7);
-	printf("test:  \"%s\" %d\n", dst, n);
-	n = strlcpy(dst, src, 7);
-	printf("libc:  \"%s\" %d\n", dst, n);
-	n = ft_strlcpy(dst, src, 16);
-	printf("test:  \"%s\" %d\n", dst, n);
-	n = strlcpy(dst, src, 16);
-	printf("libc:  \"%s\" %d\n", dst, n);
+	n = ft_strlcpy(dst, src, 0);
+	printf("libft:  %d\n", n);
+	n = strlcpy(dst, src, 0);
+	printf("libc:   %d\n", n);
 	n = ft_strlcpy(dst, src, 1);
-	printf("test:  \"%s\" %d\n", dst, n);
+	printf("libft:  \"%s\" %d\n", dst, n);
 	n = strlcpy(dst, src, 1);
-	printf("libc:  \"%s\" %d\n", dst, n);
+	printf("libc:   \"%s\" %d\n", dst, n);
+	n = ft_strlcpy(dst, src, 7);
+	printf("libft:  \"%s\" %d\n", dst, n);
+	n = strlcpy(dst, src, 7);
+	printf("libc:   \"%s\" %d\n", dst, n);
+	n = ft_strlcpy(dst, src, 16);
+	printf("libft:  \"%s\" %d\n", dst, n);
+	n = strlcpy(dst, src, 16);
+	printf("libc:   \"%s\" %d\n", dst, n);
 }
 
-void	test_single_strlcat(size_t size)
+void	test_single_strlcat(char *dst, char *src, size_t size)
 {
-	char	*src = "world!!!!!!";
-	char	dst0[32] = "Hello ";
-	char	dst1[32] = "Hello ";
+	char	dst1[32];
 	size_t	n;
 
-	n = ft_strlcat(dst0, src, size);
-	printf("test:  \"%s\" %zu %zu %zu\n", dst0, size, ft_strlen(dst0), n);
+	memset(dst1, 'A', 32);
+	strcpy(dst1, dst);
+	n = ft_strlcat(dst1, src, size);
+	printf("libft:  \"%s\" %zu %zu %zu\n", dst1, size, ft_strlen(dst1), n);
+	memset(dst1, 'A', 32);
+	strcpy(dst1, dst);
 	n = strlcat(dst1, src, size);
-	printf("libc:  \"%s\" %zu %zu %zu\n", dst1, size, ft_strlen(dst1), n);
+	printf("libc:   \"%s\" %zu %zu %zu\n", dst1, size, ft_strlen(dst1), n);
 }
 
 void	test_strlcat(void)
 {
-	size_t	i;
+	char	*dst = "Hello ";
+	char	*src = "world!!!!!!";
 
 	printheader("ft_strlcat");
-	i = 1;
-	while (i <= 32)
-	{
-		test_single_strlcat(i);
-		i++;
-	}
+	printf("\"Hello \" \"%s\"  %zu %zu\n", src,
+		ft_strlen("Hello "), ft_strlen(src));
+	test_single_strlcat(dst, src, 1);
+	test_single_strlcat(dst, src, 7);
+	test_single_strlcat(dst, src, 8);
+	test_single_strlcat(dst, src, 13);
+	test_single_strlcat(dst, src, 32);
 }
 
 void	test_toupper_lower(void)
@@ -191,20 +199,20 @@ void	test_strchr(void)
 	char	*s = "Go and find the needle in the haystack, my friend.";
 
 	printheader("ft_strchr");
-	printf("test:  %s\n", ft_strchr(s, 'f'));
-	printf("libc:  %s\n", strchr(s, 'f'));
-	printf("test:  %d\n", *ft_strchr(s, '\0'));
-	printf("libc:  %d\n", *strchr(s, '\0'));
-	printf("test:  %s\n", ft_strchr(s, 'x'));
-	printf("libc:  %s\n", strchr(s, 'x'));
-	printf("test:  %s\n", ft_strrchr(s, 'f'));
-	printf("libc:  %s\n", strrchr(s, 'f'));
-	printf("test:  %d\n", *ft_strrchr(s, '\0'));
-	printf("libc:  %d\n", *strrchr(s, '\0'));
-	printf("test:  %s\n", ft_strrchr(s, 'x'));
-	printf("libc:  %s\n", strrchr(s, 'x'));
-	printf("test:  %s\n", ft_strrchr(s, 'G'));
-	printf("libc:  %s\n", strrchr(s, 'G'));
+	printf("libft:  %s\n", ft_strchr(s, 'f'));
+	printf("libc:   %s\n", strchr(s, 'f'));
+	printf("libft:  %d\n", *ft_strchr(s, '\0'));
+	printf("libc:   %d\n", *strchr(s, '\0'));
+	printf("libft:  %s\n", ft_strchr(s, 'x'));
+	printf("libc:   %s\n", strchr(s, 'x'));
+	printf("libft:  %s\n", ft_strrchr(s, 'f'));
+	printf("libc:   %s\n", strrchr(s, 'f'));
+	printf("libft:  %d\n", *ft_strrchr(s, '\0'));
+	printf("libc:   %d\n", *strrchr(s, '\0'));
+	printf("libft:  %s\n", ft_strrchr(s, 'x'));
+	printf("libc:   %s\n", strrchr(s, 'x'));
+	printf("libft:  %s\n", ft_strrchr(s, 'G'));
+	printf("libc:   %s\n", strrchr(s, 'G'));
 }
 
 void	test_strncmp(void)
@@ -217,12 +225,12 @@ void	test_strncmp(void)
 	n = 5;
 	while (n <= 8)
 	{
-		printf("test:  \"%s\" \"%s\" %d %d\n", s1, s2, n, ft_strncmp(s1, s2, n));
-		printf("libc:  \"%s\" \"%s\" %d %d\n", s1, s2, n, strncmp(s1, s2, n));
+		printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s2, n, ft_strncmp(s1, s2, n));
+		printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s2, n, strncmp(s1, s2, n));
 		n++;
 	}
-	printf("test:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, ft_strncmp(s1, s2, 16));
-	printf("libc:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, strncmp(s1, s2, 16));
+	printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, ft_strncmp(s1, s2, 16));
+	printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s1, 16, strncmp(s1, s2, 16));
 }
 
 void	test_memchr(void)
@@ -234,12 +242,12 @@ void	test_memchr(void)
 	n = 6;
 	while (n <= 9)
 	{
-		printf("test:  %s\n", (char *) ft_memchr(s, 'f', n));
-		printf("libc:  %s\n", (char *) memchr(s, 'f', n));
+		printf("libft:  %s\n", (char *) ft_memchr(s, 'f', n));
+		printf("libc:   %s\n", (char *) memchr(s, 'f', n));
 		n++;
 	}
-	printf("test:  %s\n", (char *) ft_memchr(s, 'x', 64));
-	printf("libc:  %s\n", (char *) memchr(s, 'x', 64));
+	printf("libft:  %s\n", (char *) ft_memchr(s, 'x', 64));
+	printf("libc:   %s\n", (char *) memchr(s, 'x', 64));
 }
 
 void	test_memcmp(void)
@@ -252,12 +260,12 @@ void	test_memcmp(void)
 	n = 5;
 	while (n <= 8)
 	{
-		printf("test:  \"%s\" \"%s\" %d %d\n", s1, s2, n, ft_memcmp(s1, s2, n));
-		printf("libc:  \"%s\" \"%s\" %d %d\n", s1, s2, n, memcmp(s1, s2, n));
+		printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s2, n, ft_memcmp(s1, s2, n));
+		printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s2, n, memcmp(s1, s2, n));
 		n++;
 	}
-	printf("test:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, ft_memcmp(s1, s2, 16));
-	printf("libc:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, memcmp(s1, s2, 16));
+	printf("libft:  \"%s\" \"%s\" %d %d\n", s1, s1, 16, ft_memcmp(s1, s2, 16));
+	printf("libc:   \"%s\" \"%s\" %d %d\n", s1, s1, 16, memcmp(s1, s2, 16));
 }
 
 void	test_strnstr(void)
@@ -268,8 +276,8 @@ void	test_strnstr(void)
 	n = 13;
 	while (n <= 16)
 	{
-		printf("test:  \"%s\" %d\n", ft_strnstr("Find the needle in the haystack.", "needle", n), n);
-		printf("libc:  \"%s\" %d\n", strnstr("Find the needle in the haystack.", "needle", n), n);
+		printf("libft:  \"%s\" %d\n", ft_strnstr("Find the needle in the haystack.", "needle", n), n);
+		printf("libc:   \"%s\" %d\n", strnstr("Find the needle in the haystack.", "needle", n), n);
 		n++;
 	}
 }
@@ -317,7 +325,7 @@ void	test_calloc1(size_t nmemb, size_t size)
 {
 	unsigned char	*c;
 
-	printf("test:  %zu %zu:  ", nmemb, size);
+	printf("libft:  %zu %zu:  ", nmemb, size);
 	c = ft_calloc(nmemb, size);
 	if (!c)
 		printf("NULL\n");
@@ -326,7 +334,7 @@ void	test_calloc1(size_t nmemb, size_t size)
 		print_bytes(c, nmemb * size);
 		free(c);
 	}
-	printf("libc:  %zu %zu:  ", nmemb, size);
+	printf("libc:   %zu %zu:  ", nmemb, size);
 	c = calloc(nmemb, size);
 	if (!c)
 		printf("NULL\n");
