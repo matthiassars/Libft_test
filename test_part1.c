@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 13:53:04 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/07 11:31:27 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,8 +234,8 @@ void	test_strncmp(void)
 
 void	test_single_memchr(void *s, int c, size_t n)
 {
-	printf("libft:  \"%s\"\n", (char *)ft_memchr(s, c, n));
-	printf("libc:   \"%s\"\n", (char *)memchr(s, c, n));
+	printf("libft:  \"%s\"\n", (char *) ft_memchr(s, c, n));
+	printf("libc:   \"%s\"\n", (char *) memchr(s, c, n));
 }
 
 void	test_memchr(void)

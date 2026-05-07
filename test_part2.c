@@ -143,6 +143,8 @@ void	test_strmap_iteri(void)
 	printf("\"%s\"\n", fs);
 	ft_striteri(s, f2);
 	printf("\"%s\"\n", s);
+	free(s);
+	free(fs);
 }
 
 void	test_putendl_fd(void)

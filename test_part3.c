@@ -49,49 +49,50 @@ void	*strtoupper(void *ptr)
 	return (newstr);
 }
 
-void	del(void *x)
+void	empty_fn(void *x)
 {
 	(void) x;
 }
 
 int	main(void)
 {
-	char	*s0 = "Hello";
-	char	*s1 = "world!";
-	char	*s2 = "It's";
-	char	*s3 = "a";
-	char	*s4 = "beautiful";
-	char	*s5 = "day!";
 	t_list	*lst;
 	t_list	*lst1;
 
-	printheader("ft_lstnew [ft_lstiter]");
-	lst = ft_lstnew(s1);
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstnew");
+	lst = ft_lstnew("world!");
+	printlstitem(lst->content);
+	putchar('\n');
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstadd_front ft_lstiter");
+	ft_lstadd_front(&lst, ft_lstnew("Hello"));
 	printlst(lst);
 	putchar('\n');
-	printheader("ft_lstadd_front [ft_lstiter]");
-	ft_lstadd_front(&lst, ft_lstnew(s0));
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstadd_back ft_lstiter");
+	ft_lstadd_back(&lst, ft_lstnew("it's"));
+	ft_lstadd_back(&lst, ft_lstnew("a"));
+	ft_lstadd_back(&lst, ft_lstnew("beautiful"));
+	ft_lstadd_back(&lst, ft_lstnew("day!"));
 	printlst(lst);
 	putchar('\n');
-	printheader("ft_lstadd_back [ft_lstiter]");
-	ft_lstadd_back(&lst, ft_lstnew(s2));
-	ft_lstadd_back(&lst, ft_lstnew(s3));
-	ft_lstadd_back(&lst, ft_lstnew(s4));
-	ft_lstadd_back(&lst, ft_lstnew(s5));
-	printlst(lst);
-	putchar('\n');
+	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstlast");
 	printlst(ft_lstlast(lst));
 	putchar('\n');
 	printheader("ft_lstsize");
 	printf("%d\n\n", ft_lstsize(lst));
+	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstmap");
-	lst1 = ft_lstmap(lst, strtoupper, del);
+	lst1 = ft_lstmap(lst, strtoupper, free);
 	printlst(lst1);
 	putchar('\n');
+	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstclear");
-	ft_lstclear(&lst, del);
-	ft_lstclear(&lst1, del);
+	ft_lstclear(&lst, empty_fn);
+	ft_lstclear(&lst1, free);
 	printlst(lst);
+	///////////////////////////////////////////////////////////////////////////
 	return (0);
 }
