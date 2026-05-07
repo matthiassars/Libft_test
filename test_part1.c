@@ -322,7 +322,7 @@ void	test_atoi(void)
 	printf("\n");
 }
 
-void	test_calloc1(size_t nmemb, size_t size)
+void	test_single_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*c;
 
@@ -349,8 +349,8 @@ void	test_calloc1(size_t nmemb, size_t size)
 void	test_calloc(void)
 {
 	printheader("ft_calloc");
-	test_calloc1(4, 4);
-	test_calloc1(0, 4);
+	test_single_calloc(4, 4);
+	test_single_calloc(0, 4);
 }
 
 int	main(void)
