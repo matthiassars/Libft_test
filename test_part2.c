@@ -27,13 +27,13 @@ void	test_substr(void)
 {
 	printheader("ft_substr");
 	test_single_substr("Hello world!!!!!!", 0, 64);
-	test_single_substr("Hello world!!!!!!", 6, 64);
 	test_single_substr("Hello world!!!!!!", 6, 6);
+	test_single_substr("Hello world!!!!!!", 6, 2e9);
 	test_single_substr("Hello world!!!!!!", 6, 0);
-	test_single_substr("Hello world!!!!!!", 64, 1);
+	test_single_substr("Hello world!!!!!!", 32, 1);
+	test_single_substr("Hello world!!!!!!", 2e9, 1);
 	test_single_substr("Hello world", 10, 64);
 	test_single_substr("", 6, 64);
-	test_single_substr("hola", 4294967295, 0);
 }
 
 void	test_strjoin(void)
