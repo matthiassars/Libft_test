@@ -6,30 +6,38 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/07 11:31:27 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/07 20:16:22 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <bsd/string.h>
 #include "libft/libft.h"
 #include "test_utils.h"
 
-void	print_bytes(unsigned char *a, int n)
+static void	print_bytes(unsigned char *a, size_t n)
 {
-	int	i;
+	size_t	i;
+	size_t	max;
 
 	i = 0;
-	while (i < n)
+	if (n > 16)
+		max = 16;
+	else
+		max = n;
+	while (i < max)
 	{
 		printf("%d ", a[i]);
 		i++;
 	}
+	if (n > 16)
+		printf("...");
 	putchar('\n');
 }
 
-void	test_isalpha(void)
+static void	test_isalpha(void)
 {
 	int	c;
 
@@ -49,7 +57,7 @@ void	test_isalpha(void)
 	}
 }
 
-void	test_strlen(void)
+static void	test_strlen(void)
 {
 	char	*s = "Hello";
 
@@ -57,7 +65,7 @@ void	test_strlen(void)
 	printf("\"%s\"  libft: %zu  libc:  %zu\n", s, ft_strlen(s), strlen(s));
 }
 
-void	test_mem(void)
+static void	test_mem(void)
 {
 	unsigned char	s[8];
 	unsigned char	s1[8];
@@ -79,7 +87,7 @@ void	test_mem(void)
 	print_bytes(s1, 8);
 }
 
-void	test_memmove(void)
+static void	test_memmove(void)
 {
 	char	s[11];
 	int		i;
@@ -125,7 +133,7 @@ void	test_memmove(void)
 	printf("%s\n", s);
 }
 
-void	test_strlcpy(void)
+static void	test_strlcpy(void)
 {
 	char	*src = "Hello!!!";
 	char	dst[16];
@@ -150,7 +158,7 @@ void	test_strlcpy(void)
 	printf("libc:   \"%s\" %d\n", dst, n);
 }
 
-void	test_single_strlcat(char *dst, char *src, size_t size)
+static void	test_single_strlcat(char *dst, char *src, size_t size)
 {
 	char	dst1[32];
 	size_t	n;
@@ -165,7 +173,7 @@ void	test_single_strlcat(char *dst, char *src, size_t size)
 	printf("libc:   \"%s\" %zu %zu %zu\n", dst1, size, strlen(dst1), n);
 }
 
-void	test_strlcat(void)
+static void	test_strlcat(void)
 {
 	char	*dst = "Hello ";
 	char	*src = "world!!!!!!";
@@ -180,7 +188,7 @@ void	test_strlcat(void)
 	test_single_strlcat(dst, src, 32);
 }
 
-void	test_toupper_lower(void)
+static void	test_toupper_lower(void)
 {
 	int	c;
 
@@ -194,14 +202,14 @@ void	test_toupper_lower(void)
 	putchar('\n');
 }
 
-void	test_single_strchr(char *s, int c)
+static void	test_single_strchr(char *s, int c)
 {
 	printf("'%c' %d\n", c, c);
 	printf("libft:  \"%s\" \"%s\"\n", ft_strchr(s, c), ft_strrchr(s, c));
 	printf("libc:   \"%s\" \"%s\"\n", strchr(s, c), strrchr(s, c));
 }
 
-void	test_strchr(void)
+static void	test_strchr(void)
 {
 	char	*s = "Go and find the needle in the haystack, my friend.";
 
@@ -216,13 +224,13 @@ void	test_strchr(void)
 	test_single_strchr("", 'x');
 }
 
-void	test_single_strncmp(char *s1, char *s2, size_t n)
+static void	test_single_strncmp(const char *s1, const char *s2, size_t n)
 {
-	printf("libft:  \"%s\" \"%s\" %lu %u\n", s1, s2, n, ft_strncmp(s1, s2, n));
-	printf("libc:   \"%s\" \"%s\" %lu %u\n", s1, s2, n, strncmp(s1, s2, n));
+	printf("libft:  \"%s\" \"%s\" %lu  libft: %d  libc: %d\n",
+		s1, s2, n, ft_strncmp(s1, s2, n), strncmp(s1, s2, n));
 }
 
-void	test_strncmp(void)
+static void	test_strncmp(void)
 {
 	printheader("ft_strncmp");
 	test_single_strncmp("Hello world!", "Hello everyone!", 0);
@@ -232,13 +240,13 @@ void	test_strncmp(void)
 	test_single_strncmp("Hello!\x80", "Hello!\0", 7);
 }
 
-void	test_single_memchr(void *s, int c, size_t n)
+static void	test_single_memchr(void *s, int c, size_t n)
 {
 	printf("libft:  \"%s\"\n", (char *) ft_memchr(s, c, n));
 	printf("libc:   \"%s\"\n", (char *) memchr(s, c, n));
 }
 
-void	test_memchr(void)
+static void	test_memchr(void)
 {
 	char	s[64] = "Go and find the needle in the haystack, my friend.";
 
@@ -251,13 +259,13 @@ void	test_memchr(void)
 	test_single_memchr("", 'x', 1);
 }
 
-void	test_single_memcmp(char *s1, char *s2, size_t n)
+static void	test_single_memcmp(char *s1, char *s2, size_t n)
 {
 	printf("libft:  \"%s\" \"%s\" %lu %u\n", s1, s2, n, ft_memcmp(s1, s2, n));
 	printf("libc:   \"%s\" \"%s\" %lu %u\n", s1, s2, n, memcmp(s1, s2, n));
 }
 
-void	test_memcmp(void)
+static void	test_memcmp(void)
 {
 	printheader("ft_memcmp");
 	test_single_memcmp("Hello world!", "Hello everyone!", 0);
@@ -266,13 +274,13 @@ void	test_memcmp(void)
 	test_single_memcmp("Hello world!", "Hello everyone!", 16);
 }
 
-void	test_single_strnstr(size_t n)
+static void	test_single_strnstr(size_t n)
 {
 	printf("libft:  \"%s\" %ld\n", ft_strnstr("Find the needle in the haystack.", "needle", n), n);
 	printf("libc:   \"%s\" %ld\n", strnstr("Find the needle in the haystack.", "needle", n), n);
 }
 
-void	test_strnstr(void)
+static void	test_strnstr(void)
 {
 	printheader("ft_strnstr");
 	test_single_strnstr(0);
@@ -280,12 +288,12 @@ void	test_strnstr(void)
 	test_single_strnstr(15);
 }
 
-void	test_single_atoi(char *s)
+static void	test_single_atoi(char *s)
 {
 	printf("\"%s\" %d  ", s, ft_atoi(s));
 }
 
-void	test_atoi(void)
+static void	test_atoi(void)
 {
 	long	i;
 	char	*s;
@@ -322,17 +330,19 @@ void	test_atoi(void)
 	printf("\n");
 }
 
-void	test_single_calloc(size_t nmemb, size_t size)
+static void	test_single_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*c;
+	size_t			tot_size;
 
+	tot_size = nmemb * size;
 	printf("libft:  %zu %zu:  ", nmemb, size);
 	c = ft_calloc(nmemb, size);
 	if (!c)
 		printf("NULL\n");
 	else
 	{
-		print_bytes(c, nmemb * size);
+		print_bytes(c, tot_size);
 		free(c);
 	}
 	printf("libc:   %zu %zu:  ", nmemb, size);
@@ -341,16 +351,19 @@ void	test_single_calloc(size_t nmemb, size_t size)
 		printf("NULL\n");
 	else
 	{
-		print_bytes(c, nmemb * size);
+		print_bytes(c, tot_size);
 		free(c);
 	}
 }
 
-void	test_calloc(void)
+static void	test_calloc(void)
 {
 	printheader("ft_calloc");
 	test_single_calloc(4, 4);
 	test_single_calloc(0, 4);
+	test_single_calloc(1e9, 1e9);
+	test_single_calloc(SIZE_MAX, SIZE_MAX);
+	test_single_calloc(-5, -5);
 }
 
 int	main(void)

@@ -15,7 +15,7 @@
 #include "libft/libft.h"
 #include "test_utils.h"
 
-void	printlstitem(void *content)
+static void	printcontent(void *content)
 {
 	char	*s;
 
@@ -23,14 +23,14 @@ void	printlstitem(void *content)
 	printf("%s ", s);
 }
 
-void	printlst(t_list *lst)
+static void	printlst(t_list *lst)
 {
 	printf("{ ");
-	ft_lstiter(lst, &printlstitem);
+	ft_lstiter(lst, &printcontent);
 	printf("}\n");
 }
 
-void	*strtoupper(void *ptr)
+static void	*strtoupper(void *ptr)
 {
 	char	*str;
 	char	*newstr;
@@ -49,7 +49,7 @@ void	*strtoupper(void *ptr)
 	return (newstr);
 }
 
-void	empty_fn(void *x)
+static void	empty_fn(void *x)
 {
 	(void) x;
 }
@@ -62,8 +62,8 @@ int	main(void)
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstnew");
 	lst = ft_lstnew("world!");
-	printlstitem(lst->content);
-	putchar('\n');
+	printlst(lst);
+	printf("\n");
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstadd_front ft_lstiter");
 	ft_lstadd_front(&lst, ft_lstnew("Hello"));
@@ -71,16 +71,19 @@ int	main(void)
 	putchar('\n');
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstadd_back ft_lstiter");
-	ft_lstadd_back(&lst, ft_lstnew("it's"));
+	ft_lstadd_back(&lst, ft_lstnew("It's"));
 	ft_lstadd_back(&lst, ft_lstnew("a"));
 	ft_lstadd_back(&lst, ft_lstnew("beautiful"));
 	ft_lstadd_back(&lst, ft_lstnew("day!"));
 	printlst(lst);
+	ft_lstadd_back(NULL, ft_lstnew("Hello"));
 	putchar('\n');
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstlast");
 	printlst(ft_lstlast(lst));
-	putchar('\n');
+	printlst(ft_lstlast(NULL));
+	printf("\n");
+	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstsize");
 	printf("%d\n\n", ft_lstsize(lst));
 	///////////////////////////////////////////////////////////////////////////
@@ -89,9 +92,11 @@ int	main(void)
 	printlst(lst1);
 	putchar('\n');
 	///////////////////////////////////////////////////////////////////////////
-	printheader("ft_lstclear");
+	printheader("ft_lstclear ft_addback");
 	ft_lstclear(&lst, empty_fn);
 	ft_lstclear(&lst1, free);
+	printlst(lst);
+	ft_lstadd_back(&lst, ft_lstnew("Hello"));
 	printlst(lst);
 	///////////////////////////////////////////////////////////////////////////
 	return (0);
