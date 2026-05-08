@@ -141,9 +141,13 @@ static void	test_strmap_iteri(void)
 
 	printheader("ft_strmapi ft_striteri");
 	s = malloc(17);
-	ft_strlcpy(s, "Hello World!!", 17);
+	strcpy(s, "Hello World!!");
 	fs = ft_strmapi(s, f1);
 	printf("\"%s\"\n", fs);
+	strcpy(s, "");
+	fs = ft_strmapi(s, f1);
+	printf("\"%s\"\n", fs);
+	strcpy(s, "Hello World!!");
 	ft_striteri(s, f2);
 	printf("\"%s\"\n", s);
 	free(s);
