@@ -340,6 +340,19 @@ static void	test_calloc(void)
 	test_single_calloc(-5, -5);
 }
 
+static void	test_strdup()
+{
+	char	*s;
+
+	printheader("ft_strdup");
+	s = ft_strdup("Hello world!");
+	printf("libft:  \"%s\"\n", s);
+	free(s);
+	s = strdup("Hello world!");
+	printf("libc:   \"%s\"\n", s);
+	free(s);
+}
+
 int	main(void)
 {
 	printheader("test part 1: libc functions");
@@ -371,6 +384,8 @@ int	main(void)
 	test_atoi();
 	putchar('\n');
 	test_calloc();
+	putchar('\n');
+	test_strdup();
 	putchar('\n');
 	return (0);
 }
