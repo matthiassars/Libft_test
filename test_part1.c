@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/08 09:38:17 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/08 15:44:04 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	test_mem(void)
 	unsigned char	s[8];
 	unsigned char	s1[8];
 
-	printheader("ft_memset ft_memcpy");
+	printheader("ft_bzero ft_memset ft_memcpy");
 	printf("libft:\n");
 	ft_bzero(s, 8);
 	print_bytes(s, 8);
@@ -87,25 +87,24 @@ static void	test_mem(void)
 	print_bytes(s1, 8);
 }
 
-static void	test_memmove(void)
+static void	test_single_memmove(char *str, int dst_i, int src_i, size_t n)
 {
 	char	s[11];
 
+	strcpy(s, str);
+	printf("%s %d %d %zu\n", s, dst_i, src_i, n);
+	printf("libft: %s ", (char *) ft_memmove(s + dst_i, s + src_i, n));
+	printf("%s\n", s);
+	strcpy(s, str);
+	printf("libc:  %s ", (char *) memmove(s + dst_i, s + src_i, n));
+	printf("%s\n", s);
+}
+
+static void	test_memmove(void)
+{
 	printheader("ft_memmove");
-	printf("libft:\n");
-	strcpy(s, "0123456789");
-	printf("%s\n", (char *) ft_memmove(s + 4, s + 2, 3));
-	printf("%s\n", s);
-	strcpy(s, "0123456789");
-	printf("%s\n", (char *) ft_memmove(s + 2, s + 4, 3));
-	printf("%s\n", s);
-	printf("libc:\n");
-	strcpy(s, "0123456789");
-	printf("%s\n", (char *) memmove(s + 4, s + 2, 3));
-	printf("%s\n", s);
-	strcpy(s, "0123456789");
-	printf("%s\n", (char *) memmove(s + 2, s + 4, 3));
-	printf("%s\n", s);
+	test_single_memmove("0123456789", 4, 2, 3);
+	test_single_memmove("0123456789", 2, 4, 3);
 }
 
 static void	test_strlcpy(void)
@@ -201,7 +200,7 @@ static void	test_strchr(void)
 
 static void	test_single_strncmp(const char *s1, const char *s2, size_t n)
 {
-	printf("libft:  \"%s\" \"%s\" %lu  libft: %d  libc: %d\n",
+	printf("\"%s\" \"%s\" %lu  libft: %d  libc: %d\n",
 		s1, s2, n, ft_strncmp(s1, s2, n), strncmp(s1, s2, n));
 }
 

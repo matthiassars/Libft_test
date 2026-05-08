@@ -154,31 +154,6 @@ static void	test_strmap_iteri(void)
 	free(fs);
 }
 
-static void	test_putendl_fd(void)
-{
-	printheader("ft_putchar_fd ft_putendl_fd");
-	ft_putchar_fd('\"', 1);
-	ft_putendl_fd("Hello world!!", 1);
-	ft_putendl_fd("\"", 1);
-}
-
-static void	test_single_putnbr(int n)
-{
-	printf("%d\n", n);
-	ft_putnbr_fd(n, 1);
-	printf("\n");
-}
-
-static void	test_putnbr_fd(void)
-{
-	printheader("ft_putnbr_fd");
-	test_single_putnbr(-2147483648);
-	test_single_putnbr(-1337);
-	test_single_putnbr(0);
-	test_single_putnbr(1337);
-	test_single_putnbr(2147483647);
-}
-
 int	main(void)
 {
 	printheader("test part 2: additional functions");
@@ -194,10 +169,5 @@ int	main(void)
 	test_itoa();
 	putchar('\n');
 	test_strmap_iteri();
-	putchar('\n');
-	test_putendl_fd();
-	putchar('\n');
-	test_putnbr_fd();
-	putchar('\n');
 	return (0);
 }

@@ -78,12 +78,10 @@ int	main(void)
 	ft_lstadd_back(&lst, ft_lstnew("beautiful"));
 	ft_lstadd_back(&lst, ft_lstnew("day!"));
 	printlst(lst);
-	ft_lstadd_back(NULL, ft_lstnew("Hello"));
 	putchar('\n');
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstlast");
 	printlst(ft_lstlast(lst));
-	printlst(ft_lstlast(NULL));
 	printf("\n");
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstsize");
@@ -94,13 +92,31 @@ int	main(void)
 	printlst(lst1);
 	putchar('\n');
 	///////////////////////////////////////////////////////////////////////////
-	printheader("ft_lstclear ft_addback");
+	printheader("ft_lstclear");
 	ft_lstclear(&lst, empty_fn);
 	ft_lstclear(&lst1, free);
 	printlst(lst);
-	ft_lstadd_back(&lst, ft_lstnew("Hello"));
-	printlst(lst);
 	putchar('\n');
+	///////////////////////////////////////////////////////////////////////////
+	printheader("edge cases:");
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstadd_front");
+	ft_lstadd_front(NULL, ft_lstnew("Hello"));
+	ft_lstadd_front(&lst, ft_lstnew("Hello"));
+	printlst(lst);
+	ft_lstclear(&lst, empty_fn);
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstlast");
+	printlst(ft_lstlast(NULL));
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstadd_back");
+	ft_lstadd_back(NULL, ft_lstnew("Hello"));
+	ft_lstadd_front(&lst, ft_lstnew("Hello"));
+	printlst(lst);
+	ft_lstclear(&lst, empty_fn);
+	///////////////////////////////////////////////////////////////////////////
+	printheader("ft_lstclear");
+	ft_lstclear(NULL, empty_fn);
 	///////////////////////////////////////////////////////////////////////////
 	return (0);
 }
