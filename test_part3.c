@@ -59,6 +59,8 @@ int	main(void)
 	t_list	*lst;
 	t_list	*lst1;
 
+	printheader("test part 3: linked list");
+	printf("\n");
 	///////////////////////////////////////////////////////////////////////////
 	printheader("ft_lstnew");
 	lst = ft_lstnew("world!");
@@ -98,6 +100,7 @@ int	main(void)
 	printlst(lst);
 	ft_lstadd_back(&lst, ft_lstnew("Hello"));
 	printlst(lst);
+	putchar('\n');
 	///////////////////////////////////////////////////////////////////////////
 	return (0);
 }

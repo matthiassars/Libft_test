@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/06 15:08:14 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/08 09:51:00 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ static void	test_single_strtrim(char *s, char *set)
 static void	test_strtrim(void)
 {
 	printheader("ft_strtrim");
-	test_single_strtrim("___-_Hello World!!!--___", "_-");
+	test_single_strtrim("___-_Hello_world!!!--___", "_-");
 	printf("\n");
 	test_single_strtrim("___-_--___", "_-");
+	printf("\n");
+	test_single_strtrim("Hello_world!!!", "");
 }
 
 static void	test_single_split(char *s, char c)
@@ -81,18 +83,18 @@ static void	test_single_split(char *s, char c)
 		free(*word);
 		word++;
 	}
-	printf("}\n");
+	printf("}\n\n");
 	free(words);
 }
 
 static void	test_split(void)
 {
 	printheader("ft_split");
-	test_single_split("   Hello  world!    ", ' ');
-	test_single_split("   Hello  world!", ' ');
-	test_single_split("       ", ' ');
-	test_single_split("", ' ');
-	test_single_split("   Hello  world!    ", '\0');
+	test_single_split("___Hello__world!____", '_');
+	test_single_split("___Hello__world!", '_');
+	test_single_split("_______", '_');
+	test_single_split("", '_');
+	test_single_split("___Hello__world!____", '\0');
 }
 
 static void	test_itoa_range(long min, long max)
@@ -121,14 +123,15 @@ static void	test_itoa(void)
 
 char	f1(unsigned int i, char c)
 {
-	(void) i;
-	return (ft_toupper(c));
+	if (i >= 5)
+		return (ft_toupper(c));
+	return ((c));
 }
 
 static void	f2(unsigned int i, char *c)
 {
-	(void) i;
-	*c = ft_toupper(*c);
+	if (i >= 5)
+		*c = ft_toupper(*c);
 }
 
 static void	test_strmap_iteri(void)
@@ -174,6 +177,8 @@ static void	test_putnbr_fd(void)
 
 int	main(void)
 {
+	printheader("test part 2: additional functions");
+	putchar('\n');
 	test_substr();
 	putchar('\n');
 	test_strjoin();
@@ -189,5 +194,6 @@ int	main(void)
 	test_putendl_fd();
 	putchar('\n');
 	test_putnbr_fd();
+	putchar('\n');
 	return (0);
 }

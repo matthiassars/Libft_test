@@ -6,13 +6,15 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/07 20:16:22 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/08 09:38:17 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <strings.h>
+#include <ctype.h>
 #include <bsd/string.h>
 #include "libft/libft.h"
 #include "test_utils.h"
@@ -37,7 +39,7 @@ static void	print_bytes(unsigned char *a, size_t n)
 	putchar('\n');
 }
 
-static void	test_isalpha(void)
+static void	test_char_class(void)
 {
 	int	c;
 
@@ -46,13 +48,11 @@ static void	test_isalpha(void)
 	c = -1;
 	while (c <= 128)
 	{
-		printf("%03d  %d  %d  %d  %d  %d  \'%c\'\n", c,
-			ft_isalpha(c),
-		ft_isdigit(c),
-		ft_isalnum(c),
-		ft_isascii(c),
-		ft_isprint(c),
-		c);
+		printf("%03d  %d  %d  %d  %d  %d",
+			c, ft_isalpha(c), ft_isdigit(c), ft_isalnum(c), ft_isascii(c), ft_isprint(c));
+		if (isprint(c))
+			printf("  '%c'", c);
+		printf("\n");
 		c++;
 	}
 }
@@ -71,7 +71,7 @@ static void	test_mem(void)
 	unsigned char	s1[8];
 
 	printheader("ft_memset ft_memcpy");
-	printf("test:\n");
+	printf("libft:\n");
 	ft_bzero(s, 8);
 	print_bytes(s, 8);
 	ft_memset(s, 7, 4);
@@ -90,45 +90,20 @@ static void	test_mem(void)
 static void	test_memmove(void)
 {
 	char	s[11];
-	int		i;
 
 	printheader("ft_memmove");
-	printf("test:\n");
-	i = 0;
-	while (i < 10)
-	{
-		s[i] = i + '0';
-		i++;
-	}
-	s[10] = '\0';
+	printf("libft:\n");
+	strcpy(s, "0123456789");
 	printf("%s\n", (char *) ft_memmove(s + 4, s + 2, 3));
 	printf("%s\n", s);
-	i = 0;
-	while (i < 10)
-	{
-		s[i] = i + '0';
-		i++;
-	}
-	s[10] = '\0';
+	strcpy(s, "0123456789");
 	printf("%s\n", (char *) ft_memmove(s + 2, s + 4, 3));
 	printf("%s\n", s);
 	printf("libc:\n");
-	i = 0;
-	while (i < 10)
-	{
-		s[i] = i + '0';
-		i++;
-	}
-	s[10] = '\0';
+	strcpy(s, "0123456789");
 	printf("%s\n", (char *) memmove(s + 4, s + 2, 3));
 	printf("%s\n", s);
-	i = 0;
-	while (i < 10)
-	{
-		s[i] = i + '0';
-		i++;
-	}
-	s[10] = '\0';
+	strcpy(s, "0123456789");
 	printf("%s\n", (char *) memmove(s + 2, s + 4, 3));
 	printf("%s\n", s);
 }
@@ -237,7 +212,7 @@ static void	test_strncmp(void)
 	test_single_strncmp("Hello world!", "Hello everyone!", 6);
 	test_single_strncmp("Hello world!", "Hello everyone!", 7);
 	test_single_strncmp("Hello world!", "Hello everyone!", 16);
-	test_single_strncmp("Hello!\x80", "Hello!\0", 7);
+	test_single_strncmp("Hello!\x80", "Hello!\x00", 7);
 }
 
 static void	test_single_memchr(void *s, int c, size_t n)
@@ -368,7 +343,9 @@ static void	test_calloc(void)
 
 int	main(void)
 {
-	test_isalpha();
+	printheader("test part 1: libc functions");
+	putchar('\n');
+	test_char_class();
 	putchar('\n');
 	test_strlen();
 	putchar('\n');
@@ -395,5 +372,6 @@ int	main(void)
 	test_atoi();
 	putchar('\n');
 	test_calloc();
+	putchar('\n');
 	return (0);
 }

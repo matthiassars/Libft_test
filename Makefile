@@ -10,7 +10,7 @@ all: $(TARGETS)
 # $@ = Name of the target (e.g., test_part1)
 # $< = Name of the first dependency (e.g., test_part1.c)
 test_part%: test_part%.c $(LIB)
-	$(CC) $(FLAGS) -o $@ $< $(LIB)
+	$(CC) -o $@ $< $(LIB) $(FLAGS) 
 
 clean:
 	rm -f $(TARGETS)
