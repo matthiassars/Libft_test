@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/11 11:40:03 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/11 12:29:47 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ static void	test_single_split(char *s, char c, char *expected)
 		free(*word);
 		word++;
 	}
-	printf("\"%s\" '%c'\n{ %s}  ", s, c, split_str);
+	if (isprint(c))
+		printf("\"%s\" '%c'\n{ %s}  ", s, c, split_str);
+	else
+		printf("\"%s\" %d\n{ %s}  ", s, c, split_str);
 	free(words);
 	printok_ko(strcmp(split_str, expected) == 0);
 }
@@ -94,6 +97,8 @@ static void	test_split(void)
 	test_single_split("___Hello__world!____", '_', "Hello world! ");
 	printf("\n");
 	test_single_split("___Hello__world!", '_', "Hello world! ");
+	printf("\n");
+	test_single_split("Hello__world!____", '_', "Hello world! ");
 	printf("\n");
 	test_single_split("_______", '_', "");
 	printf("\n");

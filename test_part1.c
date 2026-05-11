@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       :::      ::::::::    */
-/*   test_part1.c                                      :+:      :+:    :+:    */
-/*                                                   +:+ +:+         +:+      */
-/*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
-/*                                               +#+#+#+#+#+   +#+            */
-/*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/11 11:02:18 by msars           ###   ########.fr        */
+/*                                                        :::      ::::::::   */
+/*   test_part1.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msars <msars@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/05 23:33:32 by msars             #+#    #+#             */
+/*   Updated: 2026/05/11 12:40:15 by msars            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,17 @@ static void	test_single__char_class(int c)
 	else
 		printf("   ");
 	printf(" %d  %d  %d  %d  %d  ",
-		ft_isalpha(c), ft_isdigit(c), ft_isalnum(c), ft_isascii(c), ft_isprint(c));
+		ft_isalpha(c),
+		ft_isdigit(c),
+		ft_isalnum(c),
+		ft_isascii(c),
+		ft_isprint(c));
 	printok_ko(ft_isalpha(c) == !!isalpha(c)
 		&& ft_isalpha(c) == !!isalpha(c)
-	&& ft_isdigit(c) == !!isdigit(c)
-	&& ft_isalnum(c) == !!isalnum(c)
-	&& ft_isascii(c) == !!isascii(c)
-	&& ft_isprint(c) == !!isprint(c));
+		&& ft_isdigit(c) == !!isdigit(c)
+		&& ft_isalnum(c) == !!isalnum(c)
+		&& ft_isascii(c) == !!isascii(c)
+		&& ft_isprint(c) == !!isprint(c));
 }
 
 static void	test_char_class(void)
@@ -249,7 +253,7 @@ static void	test_strncmp(void)
 
 static void	test_single_memchr(void *s, int c, size_t n)
 {
-	printf("%zu  \"%s\"  ", n, (char *) ft_memchr(s, c, n));
+	printf("'%c' %zu  \"%s\"  ", c, n, (char *) ft_memchr(s, c, n));
 	printok_ko(ft_memchr(s, c, n) == memchr(s, c, n));
 }
 
@@ -438,6 +442,5 @@ int	main(void)
 	test_calloc();
 	putchar('\n');
 	test_strdup();
-	putchar('\n');
 	return (0);
 }
