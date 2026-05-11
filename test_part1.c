@@ -344,6 +344,7 @@ static void	test_single_calloc(size_t nmemb, size_t size)
 	c = ft_calloc(nmemb, size);
 	if (!c)
 	{
+		printf("NULL  ");
 		if (tot_size == 0)
 			printok_ko(0);
 		else
