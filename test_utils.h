@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/09 23:21:16 by msars            #+#    #+#              */
-/*   Updated: 2026/05/10 02:43:16 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/11 11:09:37 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <strings.h>
-# include <ctype.h>
 # include <bsd/string.h>
+# include <ctype.h>
+# include <fcntl.h>
 
 void	printrepchar(char c, int n)
 {

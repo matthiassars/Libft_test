@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/11 10:41:41 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/11 11:02:18 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ static void	print_bytes(unsigned char *a, size_t n)
 		max = 16;
 	else
 		max = n;
+	printf("{ ");
 	while (i < max)
 	{
 		printf("%d ", a[i]);
 		i++;
 	}
 	if (n > 16)
-		printf("...");
+		printf("... ");
+	putchar('}');
 }
 
 static int	cmp_sgn(int x, int y)
@@ -94,17 +96,17 @@ static void	test_mem(void)
 	ft_bzero(s, 8);
 	bzero(t, 8);
 	print_bytes(s, 8);
-	putchar(' ');
+	printf("  ");
 	printok_ko(memcmp(s, t, 8) == 0);
 	ft_memset(s, 7, 4);
 	memset(t, 7, 4);
 	print_bytes(s, 8);
-	putchar(' ');
+	printf("  ");
 	printok_ko(memcmp(s, t, 8) == 0);
 	ft_memcpy(s1, s, 8);
 	memcpy(t1, t, 8);
 	print_bytes(s1, 8);
-	putchar(' ');
+	printf("  ");
 	printok_ko(memcmp(s1, t1, 8) == 0);
 }
 
@@ -363,7 +365,7 @@ static void	test_single_calloc(size_t nmemb, size_t size)
 		return ;
 	}
 	print_bytes(c, tot_size);
-	putchar(' ');
+	printf("  ");
 	printok_ko(memcmp(c, c1, tot_size) == 0);
 	free(c);
 	free(c1);

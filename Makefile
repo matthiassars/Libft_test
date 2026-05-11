@@ -1,6 +1,6 @@
 CC =		cc
 CFLAGS =	-Wall -Wextra -lbsd
-TARGETS =	test_part1 test_part2 test_part2a test_part3
+TARGETS =	test_part1 test_part2 test_part2 test_part3
 LIB =		libft/libft.a
 
 # Default rule

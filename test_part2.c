@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/10 01:21:19 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/11 11:40:03 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,35 @@ static void	test_strmap_iteri(void)
 	free(fs);
 }
 
+void	test_put(void)
+{
+	int		fd;
+	char	text[128];
+
+	printheader("ft_putchar_fd ft_putstr_fd fd_putendl_fd fd_putnbr_fd");
+	fd = open("test_part2_out.txt", O_CREAT | O_WRONLY, 0644);
+	ft_putchar_fd('!', fd);
+	ft_putstr_fd("Hello ", fd);
+	ft_putendl_fd("world!", fd);
+	ft_putnbr_fd(-2147483648, fd);
+	ft_putchar_fd(' ', fd);
+	ft_putnbr_fd(-1337, fd);
+	ft_putchar_fd(' ', fd);
+	ft_putnbr_fd(0, fd);
+	ft_putchar_fd(' ', fd);
+	ft_putnbr_fd(1337, fd);
+	ft_putchar_fd(' ', fd);
+	ft_putnbr_fd(2147483647, fd);
+	ft_putchar_fd('\0', fd);
+	close(fd);
+	fd = open("test_part2_out.txt", O_RDONLY);
+	read(fd, text, 128);
+	close(fd);
+	printf("\"%s\"  ", text);
+	printok_ko(strcmp(text, "!Hello world!\n"
+			"-2147483648 -1337 0 1337 2147483647") == 0);
+}
+
 int	main(void)
 {
 	printheader("test part 2: additional functions");
@@ -182,5 +211,7 @@ int	main(void)
 	test_itoa();
 	putchar('\n');
 	test_strmap_iteri();
+	putchar('\n');
+	test_put();
 	return (0);
 }
