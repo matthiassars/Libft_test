@@ -173,7 +173,7 @@ static void	test_striteri(void)
 	free(s);
 }
 
-void	test_put(void)
+static void	test_put(void)
 {
 	int		fd;
 	char	text[128];
@@ -198,8 +198,9 @@ void	test_put(void)
 	read(fd, text, 128);
 	close(fd);
 	printf("\"%s\"  ", text);
-	printok_ko(strcmp(text, "!Hello world!\n"
-			"-2147483648 -1337 0 1337 2147483647") == 0);
+	printok_ko(strcmp(text,
+						"!Hello world!\n"
+						"-2147483648 -1337 0 1337 2147483647") == 0);
 }
 
 int	main(void)
