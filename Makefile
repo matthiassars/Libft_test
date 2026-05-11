@@ -1,7 +1,10 @@
 CC =		cc
-CFLAGS =	-Wall -Wextra -lbsd
-TARGETS =	test_part1 test_part2 test_part2 test_part3
-LIB =		libft/libft.a
+CFLAGS =	-Wall -Wextra -I./libft
+TARGETS =	test_part1 \
+			test_part2 \
+			test_part3
+LDFLAGS =	-L./libft
+LDLIBS =	-l:libft.a -lbsd
 
 # Default rule
 all: $(TARGETS)
@@ -9,8 +12,8 @@ all: $(TARGETS)
 # Generic rule for all targets
 # $@ = Name of the target (e.g., test_part1)
 # $< = Name of the first dependency (e.g., test_part1.c)
-test_part%: test_part%.c $(LIB)
-	$(CC) -o $@ $< $(LIB) $(CFLAGS)
+test_%: test_%.c $(LIB)
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(TARGETS)

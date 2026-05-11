@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                       :::      ::::::::    */
-/*   test_part2.c                                      :+:      :+:    :+:    */
-/*                                                   +:+ +:+         +:+      */
-/*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
-/*                                               +#+#+#+#+#+   +#+            */
-/*   Created: 2026/05/05 18:32:45 by msars            #+#    #+#              */
-/*   Updated: 2026/05/11 12:29:47 by msars           ###   ########.fr        */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "libft/libft.h"
+#include "libft.h"
 #include "test_utils.h"
 
 static void	test_single_substr(char *s, unsigned int start, size_t len, char *expected)

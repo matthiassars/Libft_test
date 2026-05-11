@@ -1,26 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test_part3.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: msars <msars@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 11:38:41 by msars             #+#    #+#             */
-/*   Updated: 2026/05/11 12:41:42 by msars            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
-#include <ctype.h>
-#include "libft/libft.h"
+#include "libft.h"
 #include "test_utils.h"
 
-static void	sprintlst(char *s, t_list *lst)
+static void sprintlst(char *s, t_list *lst)
 {
 	sprintf(s, "{ ");
 	while (lst)
 	{
-		strcat(s, (char *) lst->content);
+		strcat(s, (char *)lst->content);
 		strcat(s, " ");
 		lst = lst->next;
 	}
@@ -28,9 +14,9 @@ static void	sprintlst(char *s, t_list *lst)
 	printf("%s  ", s);
 }
 
-static void	upcase(void *ptr)
+static void upcase(void *ptr)
 {
-	char	*c;
+	char *c;
 
 	c = ptr;
 	while (*c)
@@ -40,11 +26,11 @@ static void	upcase(void *ptr)
 	}
 }
 
-static void	*capitalize(void *ptr)
+static void *capitalize(void *ptr)
 {
-	char	*str;
-	char	*newstr;
-	char	*newstrptr;
+	char *str;
+	char *newstr;
+	char *newstrptr;
 
 	str = ptr;
 	newstr = malloc(strlen(str) + 1);
@@ -67,17 +53,17 @@ static void	*capitalize(void *ptr)
 	return (newstr);
 }
 
-static void	noop(void *x)
+static void noop(void *x)
 {
-	(void) x;
+	(void)x;
 }
 
-int	main(void)
+int main(void)
 {
-	t_list	*lst;
-	t_list	*lst1;
-	char	*s;
-	char	*print_str;
+	t_list *lst;
+	t_list *lst1;
+	char *s;
+	char *print_str;
 
 	s = malloc(128);
 	print_str = malloc(128);
