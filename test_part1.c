@@ -6,7 +6,7 @@
 /*   By: msars <msars@student.42berlin.de>         #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/05/05 23:33:32 by msars            #+#    #+#              */
-/*   Updated: 2026/05/10 02:07:29 by msars           ###   ########.fr        */
+/*   Updated: 2026/05/11 10:41:41 by msars           ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -350,7 +350,10 @@ static void	test_single_calloc(size_t nmemb, size_t size)
 	c = ft_calloc(nmemb, size);
 	if (!c)
 	{
-		printok_ko(1);
+		if (tot_size == 0)
+			printok_ko(0);
+		else
+			printok_ko(1);
 		return ;
 	}
 	c1 = calloc(nmemb, size);
