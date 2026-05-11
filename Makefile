@@ -4,7 +4,7 @@ TARGETS =	test_part1 \
 			test_part2 \
 			test_part3
 LDFLAGS =	-L./libft
-LDLIBS =	-l:libft.a -lbsd
+LDLIBS =	-lft -lbsd
 
 # Default rule
 all: $(TARGETS)
