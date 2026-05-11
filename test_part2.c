@@ -3,8 +3,12 @@
 
 static void	test_single_substr(char *s, unsigned int start, size_t len, char *expected)
 {
-	printf("\"%s\" %d %ld  \"%s\"  ", s, start, len, ft_substr(s, start, len));
-	printok_ko(strcmp(ft_substr(s, start, len), expected) == 0);
+	char	*subs;
+
+	subs = ft_substr(s, start, len);
+	printf("\"%s\" %d %ld  \"%s\"  ", s, start, len, subs);
+	printok_ko(strcmp(subs, expected) == 0);
+	free(subs);
 }
 
 static void	test_substr(void)
@@ -97,11 +101,14 @@ static void	test_split(void)
 
 static void	test_single_itoa(long n)
 {
-	char	s[12];
+	char	*s;
+	char	s1[12];
 
-	printf("%ld \"%s\"  ", n, ft_itoa(n));
-	sprintf(s, "%d", (int) n);
-	printok_ko(strcmp(ft_itoa(n), s) == 0);
+	s = ft_itoa(n);
+	printf("%ld \"%s\"  ", n, s);
+	sprintf(s1, "%d", (int) n);
+	printok_ko(strcmp(s, s1) == 0);
+	free(s);
 }
 
 static void	test_itoa_range(long min, long max)
@@ -131,33 +138,39 @@ char	f1(unsigned int i, char c)
 	return ((c));
 }
 
+static void	test_single_strmapi(char *s, char *expected)
+{
+	char	*fs;
+
+	fs = ft_strmapi(s, f1);
+	printf("\"%s\"  ", fs);
+	printok_ko(strcmp(fs, expected) == 0);
+	free(fs);
+}
+
+static void	test_strmapi(void)
+{
+	printheader("ft_strmapi");
+	test_single_strmapi("Hello world!", "Hello WORLD!");
+	test_single_strmapi("", "");
+}
+
 static void	f2(unsigned int i, char *c)
 {
 	if (i >= 5)
 		*c = ft_toupper(*c);
 }
 
-static void	test_strmap_iteri(void)
+static void	test_striteri(void)
 {
 	char	*s;
-	char	*fs;
 
-	printheader("ft_strmapi ft_striteri");
-	s = malloc(17);
-	strcpy(s, "Hello world!!");
-	fs = ft_strmapi(s, f1);
-	printf("\"%s\"  ", fs);
-	printok_ko(strcmp(fs, "Hello WORLD!!") == 0);
-	strcpy(s, "");
-	fs = ft_strmapi(s, f1);
-	printf("\"%s\"  ", fs);
-	printok_ko(strcmp(fs, "") == 0);
-	strcpy(s, "Hello world!!");
+	printheader("ft_striteri");
+	s = strdup("Hello world!!");
 	ft_striteri(s, f2);
 	printf("\"%s\"  ", s);
 	printok_ko(strcmp(s, "Hello WORLD!!") == 0);
 	free(s);
-	free(fs);
 }
 
 void	test_put(void)
@@ -192,7 +205,6 @@ void	test_put(void)
 int	main(void)
 {
 	printheader("test part 2: additional functions");
-	putchar('\n');
 	test_substr();
 	putchar('\n');
 	test_strjoin();
@@ -203,7 +215,9 @@ int	main(void)
 	putchar('\n');
 	test_itoa();
 	putchar('\n');
-	test_strmap_iteri();
+	test_strmapi();
+	putchar('\n');
+	test_striteri();
 	putchar('\n');
 	test_put();
 	return (0);
