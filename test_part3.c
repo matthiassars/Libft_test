@@ -74,17 +74,17 @@ int main(void)
 	strcpy(s + 64, "beautiful");
 	strcpy(s + 80, "day!");
 	printheader("test part 3: linked list");
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstnew");
 	lst = ft_lstnew(s + 16);
 	sprintlst(print_str, lst);
 	printok_ko(strcmp(print_str, "{ world! }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstadd_front");
 	ft_lstadd_front(&lst, ft_lstnew(s));
 	sprintlst(print_str, lst);
 	printok_ko(strcmp(print_str, "{ Hello world! }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstadd_back");
 	ft_lstadd_back(&lst, ft_lstnew(s + 32));
 	ft_lstadd_back(&lst, ft_lstnew(s + 48));
@@ -92,25 +92,25 @@ int main(void)
 	ft_lstadd_back(&lst, ft_lstnew(s + 80));
 	sprintlst(print_str, lst);
 	printok_ko(strcmp(print_str, "{ Hello world! It's a beautiful day! }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstlast");
 	sprintlst(print_str, ft_lstlast(lst));
 	printok_ko(strcmp(print_str, "{ day! }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstsize");
 	printf("%d  ", ft_lstsize(lst));
 	printok_ko(ft_lstsize(lst) == 6);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstiter");
 	ft_lstiter(lst, upcase);
 	sprintlst(print_str, lst);
 	printok_ko(strcmp(print_str, "{ HELLO WORLD! IT'S A BEAUTIFUL DAY! }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstmap");
 	lst1 = ft_lstmap(lst, capitalize, free);
 	sprintlst(print_str, lst1);
 	printok_ko(strcmp(print_str, "{ Hello World! It's A Beautiful Day! }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstclear");
 	ft_lstclear(&lst, noop);
 	ft_lstclear(&lst1, free);
@@ -118,31 +118,35 @@ int main(void)
 	printok_ko(strcmp(print_str, "{ }") == 0);
 	sprintlst(print_str, lst1);
 	printok_ko(strcmp(print_str, "{ }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
 	putchar('\n');
 	printheader("edge cases:");
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstadd_front");
 	lst = ft_lstnew("Hello");
 	ft_lstadd_front(NULL, lst);
 	printok_ko(1);
-	///////////////////////////////////////////////////////////////////////////
+
 	strcpy(s, "Hello");
 	ft_lstclear(&lst, noop);
 	ft_lstadd_front(&lst, ft_lstnew(s));
 	sprintlst(print_str, lst);
 	printok_ko(strcmp(print_str, "{ Hello }") == 0);
 	ft_lstclear(&lst, noop);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstlast");
 	sprintlst(print_str, ft_lstlast(NULL));
 	printok_ko(strcmp(print_str, "{ }") == 0);
-	///////////////////////////////////////////////////////////////////////////
+
+	printheader("ft_lstsize");
+	printf("%d  ", ft_lstsize(NULL));
+	printok_ko(ft_lstsize(NULL) == 0);
+
 	printheader("ft_lstadd_back");
 	lst = ft_lstnew(s);
 	ft_lstadd_back(NULL, lst);
 	printok_ko(1);
-	///////////////////////////////////////////////////////////////////////////
+
 	ft_lstclear(&lst, noop);
 	ft_lstclear(&lst1, noop);
 	lst1 = ft_lstnew(s);
@@ -150,11 +154,11 @@ int main(void)
 	sprintlst(print_str, lst);
 	printok_ko(strcmp(print_str, "{ Hello }") == 0);
 	ft_lstclear(&lst, noop);
-	///////////////////////////////////////////////////////////////////////////
+
 	printheader("ft_lstclear");
 	ft_lstclear(NULL, noop);
 	printok_ko(1);
-	///////////////////////////////////////////////////////////////////////////
+
 	free(s);
 	free(print_str);
 	return (0);
