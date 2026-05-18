@@ -15,7 +15,7 @@ all: $(TARGETS)
 test_%: test_%.c test_utils.h libft/libft.a
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
 
-libft/libft.a:
+libft/libft.a: libft/*.c libft/libft.h
 	$(MAKE) -C libft
 
 clean:
