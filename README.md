@@ -1,4 +1,6 @@
-*Libft_test, by Matthias Sars, <msars@student.42berlin.de>*
+# 📚 Libft_test
+
+*by Matthias Sars, <msars@student.42berlin.de>*
 
 ## Description
 Simple test programs for the project 'Libft' from the 42 core curriculum (version 19.2). The Norm and compilation behaviour are not checked. In part 1, the functions are checked against the libc functions.
