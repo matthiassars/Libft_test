@@ -352,9 +352,9 @@ static void	test_single_calloc(size_t nmemb, size_t size)
 		return ;
 	}
 	c1 = calloc(nmemb, size);
-	if (!c)
+	if (!c1)
 	{
-		free(c);
+		free(c1);
 		return ;
 	}
 	print_bytes(c, tot_size);
