@@ -1,4 +1,4 @@
-# 📚 Libft_test
+# 📚 `libft` Test
 
 *by Matthias Sars, <msars@student.42berlin.de>*
 
