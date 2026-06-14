@@ -33,7 +33,7 @@ static int	cmp_sgn(int x, int y)
 	return (0);
 }
 
-static void	test_single__char_class(int c)
+static void	test_single_char_class(int c)
 {
 	printf("%4d ", c);
 	if (isprint(c))
@@ -58,14 +58,14 @@ static void	test_char_class(void)
 {
 	printheader("ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint");
 	printf("         al dg an as pr\n");
-	test_single__char_class(-1);
-	test_single__char_class('\0');
-	test_single__char_class('#');
-	test_single__char_class('7');
-	test_single__char_class('s');
-	test_single__char_class('S');
-	test_single__char_class('s' + 256);
-	test_single__char_class(1024);
+	test_single_char_class(-1);
+	test_single_char_class('\0');
+	test_single_char_class('#');
+	test_single_char_class('7');
+	test_single_char_class('s');
+	test_single_char_class('S');
+	test_single_char_class('s' + 256);
+	test_single_char_class(1024);
 }
 
 static void	test_strlen(void)
