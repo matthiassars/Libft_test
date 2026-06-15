@@ -369,6 +369,7 @@ static void	test_calloc(void)
 	printheader("ft_calloc");
 	test_single_calloc(4, 4);
 	test_single_calloc(0, 4);
+	test_single_calloc(4, 0);
 	test_single_calloc(1e9, 1e9);
 	test_single_calloc(SIZE_MAX, SIZE_MAX);
 	test_single_calloc(-5, -5);
